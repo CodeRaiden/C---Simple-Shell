@@ -65,7 +65,7 @@ int aliasFunc(config *build)
 }
 
 /**
- * findBuiltins - checks if a command is builtin and executes.
+ * findBuiltIns - checks if a command is builtin and executes.
  * @build: input build.
  * Return: 1 if found, 0 false.
  */
