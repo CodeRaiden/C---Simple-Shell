@@ -11,7 +11,7 @@ int cdFunc(config *build)
 	_Bool ableToChange = false;
 
 	count = countArgs(build->args);
-	if (count -- 1)
+	if (count == 1)
 		ableToChange = cdToHome(build);
 	else if (count == 2 && _strcmp(build->args[1], "-") == 0)
 		ableToChange = cdToPrevious(build);
@@ -38,7 +38,7 @@ _Bool cdToHome(config *build)
 		return (true);
 
 	str = getNodeAtIndex(build->env, i);
-	ptr= _strchr(str, '=');
+	ptr = _strchr(str, '=');
 	ptr++;
 	chdir(ptr);
 	free(str);
@@ -75,7 +75,8 @@ _Bool cdToPrevious(config *build)
 	return (true);
 }
 
-/**cdToCustom - move to user input directory.
+/**
+ * cdToCustom - move to user input directory.
  * @build: input build.
  * Return: true on success, false on failure.
  */
