@@ -7,7 +7,7 @@
  */
 int countArgs(char **args)
 {
-	register int cnt = 0;
+	register int i = 0;
 
 	while (args[i])
 		i++;
@@ -20,7 +20,7 @@ int countArgs(char **args)
  * @s: input string.
  * Return: -1 if it's not a valid number, else the string in integer format.
  */
-int _atoi(cha *s)
+int _atoi(char *s)
 {
 	register int i = 0;
 	unsigned long num = 0;

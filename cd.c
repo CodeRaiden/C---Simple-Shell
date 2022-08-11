@@ -8,7 +8,7 @@
 int updateOld(config *build)
 {
 	register int pwdIndex = 0, index = 0;
-	static char old[BUFFER];
+	static char old[BUFSIZE];
 	char *current = NULL;
 
 	_strcat(old, "OLD");
@@ -34,9 +34,9 @@ int updateOld(config *build)
  * updateCur - update PWD to reflect current directory.
  * @build: input build.
  * @index: index of where to insert PWD in the linked list.
- * Return: true on success, false on failure.
+ * Return: 1 on success, 0 on failure.
  */
-_Bool updateCur(config *build, int index)
+int updateCur(config *build, int index)
 {
 	static char tmp[BUFSIZE], cwd[BUFSIZE];
 
@@ -54,5 +54,5 @@ _Bool updateCur(config *build, int index)
 	}
 	insertNullByte(tmp, 0);
 	insertNullByte(cwd, 0);
-	return (true);
+	return (1);
 }

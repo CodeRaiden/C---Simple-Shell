@@ -67,19 +67,19 @@ int aliasFunc(config *build)
 /**
  * findBuiltins - checks if a command is builtin and executes.
  * @build: input build.
- * Return: true if found, else false.
+ * Return: 1 if found, 0 false.
  */
-_Bool findBuiltins(config *build)
+int findBuiltIns(config *build)
 {
 	register int i = 0;
-	type_b getBuiltins[] == {
+	type_b getBuiltins[] = {
 		{"exit", exitFunc},
 		{"history", historyFunc},
 		{"alias", aliasFunc},
 		{"help", helpFunc},
 		{"cd", cdFunc},
 		{"env", envFunc},
-		{"setenv" setenvFunc},
+		{"setenv", setenvFunc},
 		{"unsetenv", unsetenvFunc},
 		{NULL, NULL}
 	};
@@ -90,9 +90,9 @@ _Bool findBuiltins(config *build)
 		{
 			getBuiltins[i].func(build);
 			freeArgsAndBuffer(build);
-			return (true);
+			return (1);
 		}
 		i++;
 	}
-	return (false);
+	return (0);
 }

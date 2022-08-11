@@ -8,7 +8,7 @@
 int cdFunc(config *build)
 {
 	register uint count = 0;
-	_Bool ableToChange = false;
+	int ableToChange = 0;
 
 	count = countArgs(build->args);
 	if (count == 1)
@@ -26,31 +26,31 @@ int cdFunc(config *build)
 /**
  * cdToHome - move to home directory.
  * @build: input build.
- * Return: true on success, false on failure.
+ * Return: 1 on success, 0 on failure.
  */
-_Bool cdToHome(config *build)
+int cdToHome(config *build)
 {
 	register int i;
 	char *str, *ptr;
 
 	i = searchNode(build->env, "HOME");
 	if (i == -1)
-		return (true);
+		return (1);
 
 	str = getNodeAtIndex(build->env, i);
 	ptr = _strchr(str, '=');
 	ptr++;
 	chdir(ptr);
 	free(str);
-	return (true);
+	return (1);
 }
 
 /**
  * cdToPrevious - move to previous directory.
  * @build: input build.
- * Return: true on success, false on failure.
+ * Return: 1 on success, 0 on failure.
  */
-_Bool cdToPrevious(config *build)
+int cdToPrevious(config *build)
 {
 	register int i;
 	char *str, *ptr;
@@ -63,7 +63,7 @@ _Bool cdToPrevious(config *build)
 		chdir(current);
 		write(STDOUT_FILENO, current, _strlen(current));
 		displayNewLine();
-		return (true);
+		return (1);
 	}
 	str = getNodeAtIndex(build->env, i);
 	ptr = _strchr(str, '=');
@@ -72,15 +72,15 @@ _Bool cdToPrevious(config *build)
 	write(STDOUT_FILENO, ptr, _strlen(ptr));
 	displayNewLine();
 	free(str);
-	return (true);
+	return (1);
 }
 
 /**
  * cdToCustom - move to user input directory.
  * @build: input build.
- * Return: true on success, false on failure.
+ * Return: 1 on success, 0 on failure.
  */
-_Bool cdToCustom(config *build)
+int cdToCustom(config *build)
 {
 	register int changeStatus;
 
@@ -89,21 +89,21 @@ _Bool cdToCustom(config *build)
 	{
 		errno = EBADCD;
 		errorHandler(build);
-		return (false);
+		return (0);
 	}
-	return (true);
+	return (1);
 }
 
 /**
  * updateEnviron - updates enviromental variables.
  * @build: input build.
- * Return: true on success, false on failure.
+ * Return: 1 on success, 0 on failure.
  */
-_Bool updateEnviron(config *build)
+int updateEnviron(config *build)
 {
 	register int i;
 
 	i = updateOld(build);
 	updateCur(build, i);
-	return (true);
+	return (1);
 }
